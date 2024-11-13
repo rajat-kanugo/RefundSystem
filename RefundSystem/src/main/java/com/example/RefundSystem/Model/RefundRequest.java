@@ -1,9 +1,6 @@
 package com.example.RefundSystem.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class RefundRequest {
@@ -11,10 +8,11 @@ public class RefundRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private double initiateRefundAmount;
     private double systemGeneratedRefundAmount;
-    private String refundStatus;
     private String refundLink;
+    private String refundStatus;
 
     // Getters and Setters
     public Long getId() {
@@ -41,19 +39,19 @@ public class RefundRequest {
         this.systemGeneratedRefundAmount = systemGeneratedRefundAmount;
     }
 
-    public String getRefundStatus() {
-        return refundStatus;
-    }
-
-    public void setRefundStatus(String refundStatus) {
-        this.refundStatus = refundStatus;
-    }
-
     public String getRefundLink() {
         return refundLink;
     }
 
     public void setRefundLink(String refundLink) {
         this.refundLink = refundLink;
+    }
+
+    public String getRefundStatus() {
+        return refundStatus;
+    }
+
+    public void setRefundStatus(String refundStatus) {
+        this.refundStatus = refundStatus;
     }
 }

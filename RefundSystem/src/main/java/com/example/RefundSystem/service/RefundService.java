@@ -1,12 +1,11 @@
 package com.example.RefundSystem.service;
 
 import com.example.RefundSystem.Model.RefundRequest;
+
 import java.util.List;
 import java.util.Optional;
 
-
 public interface RefundService {
-
     RefundRequest createRefundRequest(RefundRequest request);
     Optional<RefundRequest> getRefundRequest(Long id);
     List<RefundRequest> getAllRefundRequests();
@@ -14,7 +13,3 @@ public interface RefundService {
     void deleteRefundRequest(Long id);
     RefundRequest processRefund(RefundRequest request);
 }
-
-
-
-

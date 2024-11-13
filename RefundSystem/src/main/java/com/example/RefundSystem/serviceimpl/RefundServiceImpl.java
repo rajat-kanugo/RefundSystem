@@ -44,11 +44,28 @@ public class RefundServiceImpl implements RefundService {
     @Override
     public RefundRequest processRefund(RefundRequest request) {
         if (request.getInitiateRefundAmount() == request.getSystemGeneratedRefundAmount()) {
-            request.setRefundStatus("REFUNDED");
+            // Amounts match, process refund immediately
+            callRazorPayXAPI(request);
             request.setRefundLink("GeneratedLink");
+            request.setRefundStatus("INITIATED");
+            repository.save(request);
+
+            // Update status to REFUNDED once processed
+            request.setRefundStatus("REFUNDED");
+            updateMoEngage(request);
         } else {
+            // Amounts don't match, set to PENDING
             request.setRefundStatus("PENDING");
+            repository.save(request);
         }
-        return repository.save(request);
+        return request;
+    }
+
+    private void callRazorPayXAPI(RefundRequest request) {
+        System.out.println("Calling RazorPayX API for refund processing.");
+    }
+
+    private void updateMoEngage(RefundRequest request) {
+        System.out.println("Updating MoEngage with status: " + request.getRefundStatus());
     }
 }
